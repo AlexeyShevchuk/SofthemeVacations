@@ -1,11 +1,13 @@
 .container{
+    padding-top: 30px;
+    color:  #222222; 
     width: 540px;   
         .table{
             background-color:rgba(192, 192, 192, 0.1);
             font-size: 14px;       
             color: white;
-            border: 1px solid white;
-            border-radius: 15px !important;
+            border-radius: 15px;
+            border: 1px solid  #878787;
             
     .mytopborder {                
         td{
@@ -15,6 +17,7 @@
             }
         }
     } 
+    
 }
 
 

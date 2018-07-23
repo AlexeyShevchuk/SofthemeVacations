@@ -1,0 +1,30 @@
+<div class="container">
+  <table class="table  ">
+    <thead>
+      <tr class="mytopborder">
+        <td>My Vacations</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </thead>
+    <thead>
+      <tr class="text-muted">
+        <td>vacation dates</td>
+        <td>description</td>
+        <td>status</td>
+        <td>vacation balance</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vac of vacations">
+        <td> 
+          {{vac.startVocationDate | date:'dd/MM/yy' }} - {{vac.endVocationDate | date:'dd/MM/yy'}} 
+        </td>
+        <td class="text-muted " > Vacation </td>
+        <td style="color:rgb(19, 164, 72);"> Approved</td>
+        <td style="text-align: center"> {{ GetVacationBal(vac.endVocationDate, vac.startVocationDate)}}  </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

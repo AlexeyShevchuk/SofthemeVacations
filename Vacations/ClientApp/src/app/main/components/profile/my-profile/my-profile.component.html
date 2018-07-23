@@ -1,0 +1,88 @@
+<div class="comp-container">
+  <h3>My profile
+    <button class="pull-right">
+      <i class="icon-edit-icon-white"></i>
+    </button>
+  </h3>
+  <div class="main-details">
+    <div class="pull-left">
+      <button class="rounded-circle">
+        <i class="icon-user-icon"></i>
+      </button>
+    </div>
+    <div class="pull-left main-details-text" *ngIf="employee; else loading">
+        <h3>
+          <p> {{ employee.name }} </p>
+          <p> {{employee.surname}} </p>
+        </h3>
+      <h4 *ngIf="employee.jobTitle; else jobTitle"> {{employee.jobTitle}} </h4>
+      <div class="status">
+        <i class="icon-approved-request active"></i>active</div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="details">
+    <dl>
+      <dt>date of birth</dt>
+      <dl> <p *ngIf="employee.birthday; else birthday"> {{ employee.birthday | date:'mediumDate' }} </p> 
+      </dl>
+
+      <dt>personal email</dt>
+      <dl> 
+        <p *ngIf="employee.workEmail; else PersEmail">
+            {{ employee.workEmail}}
+        </p>
+      </dl>
+
+      <dt>work email</dt>
+      <dl>
+          <p *ngIf="employee.workEmail; else workEmail">
+              {{ employee.workEmail}}
+          </p>
+      </dl>
+
+      <dt>phone number</dt>
+      <dl> 
+        <p *ngIf="employee.telephoneNumber; else phone">
+            +{{employee.telephoneNumber}}
+        </p>
+      </dl>
+
+      <dt>skype</dt>
+      <dl>
+        <p>
+            {{employee.skype}}
+        </p>
+      </dl>
+
+      <dt>hire date</dt>
+      <dl>
+        <p *ngIf="employee.startDate; else workDate">
+            {{employee.startDate | date:'mediumDate' }} - {{employee.endDate | date:'mediumDate'}} 
+        </p>
+      </dl>
+
+      <dt>team name</dt>
+      <dl>
+        <p *ngIf="employee.team; else team">
+            {{employee.team}} 
+        </p>
+      </dl>
+
+      <dt>team leader</dt>
+      <dl>Name Surname</dl>
+    </dl>
+  </div>
+</div>
+
+<ng-template #loading>Long Loading...</ng-template>
+<ng-template #jobTitle>Job Title</ng-template>
+
+<ng-template #birthday>XX Month XXXX</ng-template>
+<ng-template #PersEmail>example@mail.com</ng-template>
+<ng-template #workEmail>example@softheme.com</ng-template>
+<ng-template #phone>+380 00 000 00 00</ng-template>
+<ng-template #skypeEX>userskype</ng-template>
+<ng-template #workDate>XX Month XXXX - Nowadays</ng-template>
+<ng-template #team>Team name</ng-template>
+<ng-template #teamLead>Name Surname</ng-template>

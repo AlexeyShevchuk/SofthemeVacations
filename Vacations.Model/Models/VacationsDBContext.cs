@@ -195,7 +195,7 @@ namespace Vacations.Model.Models
 
                 entity.Property(e => e.VacationStatusId).HasColumnName("VacationStatusID");
 
-                entity.Property(e => e.Сomment).HasMaxLength(200);
+                entity.Property(e => e.Comment).HasMaxLength(200);
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Vacation)

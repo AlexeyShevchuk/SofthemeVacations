@@ -9,7 +9,7 @@ namespace Vacations.Model.Models
         public DateTime? StartVocationDate { get; set; }
         public DateTime? EndVocationDate { get; set; }
         public Guid? VacationStatusId { get; set; }
-        public string Сomment { get; set; }
+        public string Comment { get; set; }
         public Guid? EmployeeId { get; set; }
 
         public Employee Employee { get; set; }

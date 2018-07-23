@@ -1,0 +1,53 @@
+.comp-container {
+    color: white;
+
+    .main-details {
+        border: 1px solid #878787;
+        border-top: 0;
+        padding: 30px 0 30px 25px;
+        background-color: #2E2E2E;
+
+        button {
+            width: 80px;
+            height: 80px;
+            border: 0;
+            background-color: #878787;
+
+            i {
+                font-size: 28px;
+                color: white;
+            }
+        }
+
+        .main-details-text {
+            padding: 5px 20px;
+
+            h3 {
+                font-size: 19px;
+            }
+
+            h4 {
+                font-size: 14px;
+                color: #878787;
+            }
+
+            div.status {
+                font-size: 11px;
+                color: #878787;
+
+                i.active {
+                    color: #66EACA;
+                    padding-right: 7px;
+                }
+            }
+        }
+    }
+
+    > .details {
+        dt {
+            font-weight: normal;
+            color: #878787;
+            padding-bottom: 3px;
+        }
+    }
+}

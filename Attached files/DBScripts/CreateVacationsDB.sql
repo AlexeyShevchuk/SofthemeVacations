@@ -80,7 +80,7 @@ CREATE TABLE [Transaction]
 	TransactionTypeID uniqueidentifier,
 	EmployeeID uniqueidentifier, --Отдельная таблица
 	Days int,
-	Сomment nvarchar(200),
+	Comment nvarchar(200),
 	CONSTRAINT Transaction_TransactionTypeID_FK FOREIGN KEY (TransactionTypeID) REFERENCES TransactionType(TransactionTypeID),
 	CONSTRAINT Transaction_EmployeeID_FK FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 );
@@ -97,7 +97,7 @@ CREATE TABLE Vacation
 	StartVocationDate date,
 	EndVocationDate date,
 	VacationStatusID uniqueidentifier,  --Отдельная таблица
-	Сomment nvarchar(200),
+	Comment nvarchar(200),
 	EmployeeID uniqueidentifier, 
 	CONSTRAINT Vacation_EmployeeID_FK FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
 	CONSTRAINT Vacation_VacationStatusID_FK FOREIGN KEY (VacationStatusID) REFERENCES VacationStatus(VacationStatusID)

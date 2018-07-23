@@ -11,4 +11,5 @@ export interface Employee {
     employeeStatus: string;
     jobTitle: string;
     team: string[];
+    teamLead: string;
 }
