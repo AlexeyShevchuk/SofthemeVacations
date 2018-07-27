@@ -39,3 +39,4 @@ import { MainModule } from './main/main.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//platformBrowserDynamic().bootstrapModule(AppModule);
