@@ -18,8 +18,8 @@
         <td> 
           {{vac.StartVocationDate | date:'dd/MM/yy' }} - {{vac.EndVocationDate | date:'dd/MM/yy'}} 
         </td>
-        <td class="text-muted " > {{vac.VacationStatus}} </td>
-        <td style="color:rgb(19, 164, 72);"> Approved</td>
+        <td class="text-muted " >  {{vac.Comment}} </td>
+        <td style="color:rgb(19, 164, 72);">{{vac.VacationStatus}}</td>
         <td style="text-align: center"> {{ GetVacationBal(vac.EndVocationDate, vac.StartVocationDate)}}  </td>
       </tr>
     </tbody>
