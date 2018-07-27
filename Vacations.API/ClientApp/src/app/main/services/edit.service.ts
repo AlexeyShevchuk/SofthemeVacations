@@ -19,6 +19,7 @@ export class EditService {
         const data = JSON.stringify(employee);
         return this.http.put(requestUrl, data).map(() => employee);
     }
+    
 
     getEmployee(): Observable<Employee> {
         let requestUrl = environment.baseUrl + '/employees/current';
