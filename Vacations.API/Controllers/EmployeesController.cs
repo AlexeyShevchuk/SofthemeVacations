@@ -43,7 +43,7 @@ namespace Vacations.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState + " IsNotValid");
             }
 
             var currentUserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
@@ -63,7 +63,7 @@ namespace Vacations.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState + " IsNotValid");
             }
 
             try
@@ -72,7 +72,7 @@ namespace Vacations.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                return BadRequest();
+                return BadRequest(ModelState + " IsNotValid DbUpdateConcurrencyException");
             }
 
             return NoContent();
