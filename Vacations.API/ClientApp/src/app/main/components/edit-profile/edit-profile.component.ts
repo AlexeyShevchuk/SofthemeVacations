@@ -6,6 +6,8 @@ import { Team } from './models/team.model';
 import { JobTitle } from './models/job-title.model';
 import { EmployeeStatus } from './models/employee-status.model';
 import { ToastrService } from 'ngx-toastr';
+import { ImageService } from '../../services/image.service';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,8 +21,21 @@ export class EditProfileComponent implements OnInit {
   jobTitles: JobTitle[] = [];
   employeeStatuses: EmployeeStatus[] = [];
 
-  constructor(private location: Location, private service: EditService, private toast: ToastrService) { }
+  constructor(private imgUploadService: ImageService, private location: Location, private service: EditService, private toast: ToastrService) { }
 
+  fileToUpload: File = null;
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+ uploadFileToActivity() {
+  this.imgUploadService.postFile(environment.baseUrl + "/images/upload",this.fileToUpload).subscribe(data => {
+    this.toast.success("File uploaded!","Success")
+    }, error => {
+      console.log(error);
+    });
+ }
   cancel() {
     this.location.back();
   }

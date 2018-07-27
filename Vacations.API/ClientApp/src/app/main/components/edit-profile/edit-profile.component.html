@@ -10,7 +10,9 @@
         <tr>
           <td>
             <img src="../../../../assets/user profile icon.svg" class="user-photo float-left" />
-            <button type="button" class="btn btn-outline-primary float-right ">ADD PHOTO</button>
+              <label for="file">ADD PHOTO</label>
+              <input type="file" id="file"
+              (change)="handleFileInput($event.target.files)">
           </td>
           <td class="kostil">
             <label for="bday">date of birth</label>
@@ -102,7 +104,7 @@
             <button type="button" class="btn btn-outline-secondary float-right" (click) = "cancel()">CANCEL</button>
           </td>
           <td>
-            <button type="submit" class="btn btn-outline-secondary">Save Changes</button>
+            <button type="submit" class="btn btn-outline-secondary" (click) = " uploadFileToActivity()">Save Changes</button>
           </td>
         </tr>
       </tbody>

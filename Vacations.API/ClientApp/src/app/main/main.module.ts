@@ -110,6 +110,7 @@ import { ListOfTeamsComponent } from './components/list-of-teams/list-of-teams.c
 import { EditService } from './services/edit.service';
 import { MatChipsModule, MatIconModule } from '../../../node_modules/@angular/material';
 import { VacationRequestComponent } from './components/request-vacation/vacation-request/vacation-request.component';
+import { ImageService } from './services/image.service';
 
 @NgModule({
   imports: [
@@ -147,7 +148,8 @@ import { VacationRequestComponent } from './components/request-vacation/vacation
   providers: [
     ProfileService,
     VacationService,
-    EditService
+    EditService,
+    ImageService
   ]
 
 })
