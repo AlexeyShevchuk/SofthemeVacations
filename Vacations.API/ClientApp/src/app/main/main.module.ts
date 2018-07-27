@@ -109,6 +109,7 @@ import { ListOfTeamsComponent } from './components/list-of-teams/list-of-teams.c
 import { EditService } from './services/edit.service';
 import { MatChipsModule, MatIconModule } from '../../../node_modules/@angular/material';
 import { VacationRequestComponent } from './components/request-vacation/vacation-request/vacation-request.component';
+import { AddProfileComponent } from './components/add-profile/add-profile.component';
 
 
 
@@ -137,6 +138,7 @@ import { VacationRequestComponent } from './components/request-vacation/vacation
     TopNavigationComponent,
     RequestVacationComponent,
     EditProfileComponent,
+    AddProfileComponent,
     MyVacationsComponent,
     ProfileComponent,
     AddNewTeamComponent,

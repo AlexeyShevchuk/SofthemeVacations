@@ -8,11 +8,11 @@ import { EmployeeStatus } from './models/employee-status.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: 'app-add-profile',
+  templateUrl: './add-profile.component.html',
+  styleUrls: ['./add-profile.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class AddProfileComponent implements OnInit {
 
   employee: Employee = <Employee>{};
   teams: Team[] = [];
@@ -63,6 +63,5 @@ export class EditProfileComponent implements OnInit {
   Save() {
     this.service.updateEmployee(this.employee);
     this.location.back();
-
   }
 }

@@ -1,0 +1,77 @@
+
+.container{
+  margin-top: 15px;
+
+  .table{
+    background-color: #2E2E2E;
+    font-size: 14px;
+    color: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+
+    .thead-dark{
+      border-bottom: 1px solid #dee2e6;
+      border-radius: 10px 10px 0 0;
+    }
+
+    td{
+      border-top: 0;
+      border-right: 1px solid #dee2e6;
+      width:33%;
+      padding-right: 30px;
+      padding-left: 30px;
+
+      .form-control {
+        padding-left: 20px;
+        border-radius: 4px;
+        background-color: #2E2E2E;
+        color: white;
+        outline: none;
+        border: 1px solid  #dee2e6;
+      }
+
+      input[type="text"]:focus
+      {
+        background:#2E2E2E; /* Цвет фона */
+        border:1px solid  #dee2e6;
+        outline: none;
+      }
+
+      label{
+       color: grey;;
+       margin-bottom: -0.5rem;
+      }
+
+      .btn-outline-primary{
+        margin-left: 20px;
+        outline: none;
+        width: 66%;
+        margin-top: 8px;
+      }
+
+      .btn-outline-secondary{
+        color: white;
+        width: 66%;
+        outline: none;
+        margin-top: 20px;
+        text-transform: uppercase;
+      }
+
+      .btn-outline-secondary[type="submit"]{
+        width: 100%;
+        background: linear-gradient(to right, skyblue -50%, purple 150%);
+        border: 0;
+      }
+
+      img{
+        height: 50px;
+      }
+    }
+    .kostil{
+      border-right: 0 !important;
+
+    }
+  }
+}

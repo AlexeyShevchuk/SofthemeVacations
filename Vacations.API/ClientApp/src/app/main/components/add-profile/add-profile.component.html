@@ -28,35 +28,36 @@
           <tr>
             <td>
               <label for="usr">name</label>
-              <input type="text" class="form-control" id="usr" value="{{ employee.Name }}">
+              <input type="text" class="form-control" id="usr" placeholder="Enter Name">
             </td>
             <td class="kostil">
               <label for="email">personal mail</label>
-              <input type="email" class="form-control" id="email" value="{{employee.PersonalEmail}}">
+              <input type="email" class="form-control" id="email" placeholder="example@mail.com">
             </td>
             <td>
               <label for="em">work mail</label>
-              <input type="email" class="form-control" id="em" value="{{ employee.WorkEmail}}">
+              <input type="email" class="form-control" id="em" placeholder="example@mail.com">
             </td>
           </tr>
           <tr>
             <td>
               <label for="srnm">surname</label>
-              <input type="text" class="form-control" id="srnm" value="{{ employee.Surname}} ">
+              <input type="text" class="form-control" id="srnm" placeholder="Enter Surname}} ">
             </td>
             <td class="kostil">
               <label for="phnmbr">phone number</label>
-              <input type="text" class="form-control input-medium bfh-phone" data-format="+380 (dd) ddd-dd-dd" id="phnmbr" value="+{{employee.TelephoneNumber}}">
+              <input type="text" class="form-control input-medium bfh-phone" data-format="+380 (dd) ddd-dd-dd" id="phnmbr" placeholder="+380 00 000 00 00">
             </td>
             <td>
               <label for="skp">skype</label>
-              <input type="text" class="form-control" id="skp" value="{{employee.Skype}}">
+              <input type="text" class="form-control" id="skp" placeholder="userskype">
             </td>
           </tr>
           <tr>
             <td>
               <label for="sel1">job title:</label>
               <select class="form-control" id="sel1">
+                  <option selected> Not Chosen  </option>
                   <option *ngFor="let item of jobTitles">
                       {{item.Name}}
                   </option>
@@ -75,6 +76,7 @@
             <td>
               <label for="sel1">status:</label>
               <select class="form-control" id="sel1">
+                  <option selected> Not Chosen </option> 
                 <option>Active</option>
                 <option>Non Active</option>
               </select>
@@ -96,7 +98,7 @@
           <tr>
             <td>
               <label for="sel1">day in vacation:</label>
-              <input type="number" class="form-control" id="sel1" placeholder=" {{employee.Balance | number}} ">
+              <input type="number" class="form-control" id="sel1" placeholder="Enter number of days ">
             </td>
             <td class="kostil">
               <button type="button" class="btn btn-outline-secondary float-right" (click) = "cancel()">CANCEL</button>

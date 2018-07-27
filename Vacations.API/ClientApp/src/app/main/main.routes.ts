@@ -8,6 +8,7 @@ import { AddNewTeamComponent } from './components/add-new-team/add-new-team.comp
 import { EditTeamProfileComponent } from './components/edit-team-profile/edit-team-profile.component';
 import { ListOfTeamsComponent } from './components/list-of-teams/list-of-teams.component';
 import { RequestVacationComponent } from './components/request-vacation/request-vacation.component';
+import { AddProfileComponent } from './components/add-profile/add-profile.component';
 
 export const MainRoutes: Routes = [
     {
@@ -20,7 +21,8 @@ export const MainRoutes: Routes = [
             { path: 'edit-team', component: EditTeamProfileComponent },
             { path: 'edit-profile', component: EditProfileComponent },
             { path: 'list-of-teams', component: ListOfTeamsComponent},
-            { path: 'request-vacation', component: RequestVacationComponent }  
+            { path: 'request-vacation', component: RequestVacationComponent },
+            { path: 'add-new-employee', component: AddProfileComponent }
         ]
     }
 ];
