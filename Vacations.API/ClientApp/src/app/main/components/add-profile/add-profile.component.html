@@ -14,7 +14,7 @@
             </td>
             <td class="kostil">
               <label for="bday">date of birth</label>
-              <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control bg-name-field" placeholder="XX/XX/XXXX">
+              <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control bg-name-field" [(ngModel)]="employee.Birthday">
             </td>
             <td>
               <label for="rol">Role</label>
@@ -28,36 +28,35 @@
           <tr>
             <td>
               <label for="usr">name</label>
-              <input type="text" class="form-control" id="usr" placeholder="Enter Name">
+              <input type="text" class="form-control" id="usr" [(ngModel)]= "employee.Name">
             </td>
             <td class="kostil">
               <label for="email">personal mail</label>
-              <input type="email" class="form-control" id="email" placeholder="example@mail.com">
+              <input type="email" class="form-control" id="email" [(ngModel)]="employee.PersonalEmail">
             </td>
             <td>
               <label for="em">work mail</label>
-              <input type="email" class="form-control" id="em" placeholder="example@mail.com">
+              <input type="email" class="form-control" id="em" [(ngModel)]="employee.WorkEmail">
             </td>
           </tr>
           <tr>
             <td>
               <label for="srnm">surname</label>
-              <input type="text" class="form-control" id="srnm" placeholder="Enter Surname}} ">
+              <input type="text" class="form-control" id="srnm" [(ngModel)]="employee.Surname">
             </td>
             <td class="kostil">
               <label for="phnmbr">phone number</label>
-              <input type="text" class="form-control input-medium bfh-phone" data-format="+380 (dd) ddd-dd-dd" id="phnmbr" placeholder="+380 00 000 00 00">
+              <input type="text" class="form-control input-medium bfh-phone" data-format="+380 (dd) ddd-dd-dd" id="phnmbr" [(ngModel)]="employee.TelephoneNumber">
             </td>
             <td>
               <label for="skp">skype</label>
-              <input type="text" class="form-control" id="skp" placeholder="userskype">
+              <input type="text" class="form-control" id="skp" [(ngModel)]="employee.Skype">
             </td>
           </tr>
           <tr>
             <td>
               <label for="sel1">job title:</label>
               <select class="form-control" id="sel1">
-                  <option selected> Not Chosen  </option>
                   <option *ngFor="let item of jobTitles">
                       {{item.Name}}
                   </option>
@@ -65,18 +64,17 @@
             </td>
             <td class="kostil">
               <label for="bday">hire date</label>
-              <input type="date" name="bday" min="2000-01-01" max="3000-12-31" class="form-control bg-name-field" placeholder="XX/XX/XXXX">
+              <input type="date" name="bday" min="2000-01-01" max="3000-12-31" class="form-control bg-name-field" [(ngModel)]="employee.StartDate">
             </td>
             <td>
               <label for="bday">date disminssal</label>
-              <input type="date" name="bday" min="2000-01-01" max="3000-12-31" class="form-control bg-name-field" placeholder="Not Choosen">
+              <input type="date" name="bday" min="2000-01-01" max="3000-12-31" class="form-control bg-name-field"  [(ngModel)]="employee.EndDate">
             </td>
           </tr>
           <tr>
             <td>
               <label for="sel1">status:</label>
               <select class="form-control" id="sel1">
-                  <option selected> Not Chosen </option> 
                 <option>Active</option>
                 <option>Non Active</option>
               </select>
@@ -92,13 +90,13 @@
             </td>
             <td>
               <label for="tnml">team leader</label>
-              <input class="form-control" value="Oleksa" id="tnml" readonly style="color: #b8b8b8; box-shadow: none;" placeholder="{{employee.TeamLead}} ">
+              <input class="form-control" value="Oleksa" id="tnml" readonly style="color: #b8b8b8; box-shadow: none;" [(ngModel)]="employee.TeamLead ">
             </td>
           </tr>
           <tr>
             <td>
               <label for="sel1">day in vacation:</label>
-              <input type="number" class="form-control" id="sel1" placeholder="Enter number of days ">
+              <input type="number" class="form-control" id="sel1" [(ngModel)]="employee.Balance ">
             </td>
             <td class="kostil">
               <button type="button" class="btn btn-outline-secondary float-right" (click) = "cancel()">CANCEL</button>

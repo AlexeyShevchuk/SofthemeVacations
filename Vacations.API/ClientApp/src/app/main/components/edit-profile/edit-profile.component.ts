@@ -62,8 +62,9 @@ export class EditProfileComponent implements OnInit {
 
   Save() {
     console.log(this.employee);
-    this.service.updateEmployee(this.employee).subscribe();
-    
-   // this.location.back();
+    this.service.updateEmployee(this.employee).subscribe(response => this.employee = response);;
+    this.location.back();
+    this.toast.success("You successfully edit profile", "");
+    console.log(this.employeeStatuses);
   }
 }

@@ -26,42 +26,38 @@ export class AddProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    const successfnEmployee = (response) => {
-      this.employee = response;
-      this.toast.success("", "");
-      console.log(response);
-      console.log(this.employee);
-    };
-    const successfnTeams = (response) => {
+      const successfnTeams = (response) => {
       this.teams = response;
       this.toast.success("", "");
-      console.log(response);
-      console.log(this.teams);
+     // console.log(response);
+    //  console.log(this.teams);
     };
     const successfnJobTitles = (response) => {
       this.jobTitles = response;
       this.toast.success("", "");
-      console.log(response);
-      console.log(this.jobTitles);
+     // console.log(response);
+      //console.log(this.jobTitles);
     };
     const successfnEmployeeStatus = (response) => {
       this.employeeStatuses = response;
       this.toast.success("", "");
-      console.log(response);
-      console.log(this.employeeStatuses);
+     // console.log(response);
+     // console.log(this.employeeStatuses);
     };
 
     const errorfn = () => { };
     const completefn = () => { };
 
-    this.service.getEmployee().subscribe(successfnEmployee, errorfn, completefn);
     this.service.getTeam().subscribe(successfnTeams, errorfn, completefn);
     this.service.getJobTitle().subscribe(successfnJobTitles, errorfn, completefn);
     this.service.getEmployeeStatus().subscribe(successfnEmployeeStatus, errorfn, completefn);
   }
 
   Save() {
-    this.service.updateEmployee(this.employee);
-    this.location.back();
+    console.log(this.employee);
+    this.service.addEmployee(this.employee).subscribe(response => this.employee = response);;
+    //this.location.back();
+    this.toast.success("You successfully added new profile", "");
+    console.log(this.employeeStatuses);
   }
 }

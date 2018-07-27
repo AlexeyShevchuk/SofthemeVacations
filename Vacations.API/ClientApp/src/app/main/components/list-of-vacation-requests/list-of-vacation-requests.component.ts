@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VacationService } from '../../services/vacation.service';
+import { Vacation } from '../profile/my-vacations/vacation.model';
 
 @Component({
   selector: 'app-list-of-vacation-requests',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListOfVacationRequestsComponent implements OnInit {
 
-  constructor() { }
+  vacationsList: Vacation[];
+
+  constructor(private service:VacationService) { }
 
   ngOnInit() {
+    this.service.getVacations()
+    .subscribe(response => this.vacationsList = response);
   }
 
 }

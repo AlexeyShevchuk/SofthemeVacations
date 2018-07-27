@@ -15,31 +15,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr  *ngFor="let vac of vacationsList">
         <td>Name Surname</td>
         <td class="text-muted">Team Name</td>
-        <td class="text-muted">XX/XX/XX-XX/XX/XX</td>
+        <td class="text-muted">
+            {{vac.StartVocationDate | date:'dd/MM/yy' }} - {{vac.EndVocationDate | date:'dd/MM/yy'}}
+        </td>
         <td class="text-muted">XX</td>
         <td>XX days
           <i class="icon-approved-request cancel"></i>
-        </td>
-      </tr>
-      <tr>
-        <td>Name Surname</td>
-        <td class="text-muted">Team Name</td>
-        <td class="text-muted">XX/XX/XX-XX/XX/XX</td>
-        <td class="text-muted">XX</td>
-        <td>XX days
-          <i class="icon-approved-request procces"></i>
-        </td>
-      </tr>
-      <tr>
-        <td>Name Surname</td>
-        <td class="text-muted">Team Name</td>
-        <td class="text-muted">XX/XX/XX-XX/XX/XX</td>
-        <td class="text-muted">XX</td>
-        <td>XX days
-          <i class="icon-approved-request approved"></i>
         </td>
       </tr>
     </tbody>
