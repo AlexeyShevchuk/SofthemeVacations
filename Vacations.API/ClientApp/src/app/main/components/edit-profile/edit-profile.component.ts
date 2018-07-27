@@ -61,8 +61,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   Save() {
+    console.log(this.employee);
     this.service.updateEmployee(this.employee);
-    this.location.back();
-
+   // this.location.back();
   }
 }

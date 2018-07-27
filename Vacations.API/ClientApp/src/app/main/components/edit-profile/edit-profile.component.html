@@ -28,7 +28,7 @@
           <tr>
             <td>
               <label for="usr">name</label>
-              <input type="text" class="form-control" id="usr" value="{{ employee.Name }}">
+              <input type="text" class="form-control" id="usr" [(ngModel)]= "employee.Name">
             </td>
             <td class="kostil">
               <label for="email">personal mail</label>

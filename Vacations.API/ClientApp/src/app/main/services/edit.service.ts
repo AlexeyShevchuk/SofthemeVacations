@@ -14,6 +14,7 @@ export class EditService {
     constructor (private http: HttpClient) { }
 
     updateEmployee(employee: Employee): Observable<Employee> {
+        console.log("Service works");
         let requestUrl = environment.baseUrl + '/employees';
         const data = JSON.stringify(employee);
         return this.http.put(requestUrl, data).map(() => employee);
