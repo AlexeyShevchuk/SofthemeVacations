@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-top-navigation',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavigationComponent implements OnInit {
 
-  constructor() { }
+  imgUrl: string;
+
+  constructor(private imgService: ImageService) { }
 
   ngOnInit() {
+    this.imgService.getImgUrl().subscribe(
+      response => {this.imgUrl = response; console.log(response); console.log(this.imgUrl);},
+      () => this.imgUrl = "default");
   }
-
 }

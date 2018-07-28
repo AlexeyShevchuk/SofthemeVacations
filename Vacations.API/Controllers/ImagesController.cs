@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Vacations.API.Models;
+using Vacations.BLL.Models;
+using Vacations.BLL.Services;
 
 namespace Vacations.API.Controllers
 {
@@ -16,25 +21,37 @@ namespace Vacations.API.Controllers
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        readonly CloudBlobContainer _blobContainer;
+        CloudBlobContainer _blobContainer;
+        IUsersService _usersService;
+        IMapper _mapper;
 
-        public ImagesController(IConfiguration configuration)
+        public ImagesController(IConfiguration configuration, IUsersService usersService, IMapper mapper)
         {
-            var storageConnectionString = configuration.GetConnectionString("StorageConnectionString");
+            _usersService = usersService;
+            _mapper = mapper;
+            try
+            {
 
-            var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+                var storageConnectionString = configuration.GetConnectionString("StorageConnectionString");
 
-            // We are going to use Blob Storage, so we need a blob client.
-            var blobClient = storageAccount.CreateCloudBlobClient();
+                var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
 
-            // Data in blobs are organized in containers.
-            // Here, we create a new, empty container.
-            _blobContainer = blobClient.GetContainerReference("images");
-            _blobContainer.CreateIfNotExists();
+                // We are going to use Blob Storage, so we need a blob client.
+                var blobClient = storageAccount.CreateCloudBlobClient();
 
-            // We also set the permissions to "Public", so anyone will be able to access the file.
-            // By default, containers are created with private permissions only.
-            _blobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+                // Data in blobs are organized in containers.
+                // Here, we create a new, empty container.
+                _blobContainer = blobClient.GetContainerReference("images");
+                _blobContainer.CreateIfNotExists();
+
+                // We also set the permissions to "Public", so anyone will be able to access the file.
+                // By default, containers are created with private permissions only.
+                _blobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+            }
+            catch (Exception ex)
+            {
+                BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Images
@@ -45,10 +62,16 @@ namespace Vacations.API.Controllers
         }
 
         // GET: api/Images/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("current")]
+        public async Task<string> GetAsync()
         {
-            return "value";
+            var currentUserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+
+            var userDto = await _usersService.GetByEmailAsync(currentUserEmail);
+            var userModel = _mapper.Map<UserDto, UserModel>(userDto);
+
+            var blockBlob = _blobContainer.GetBlockBlobReference(userModel.EmployeeId.ToString());
+            return blockBlob.Uri.AbsoluteUri;
         }
 
         [HttpPost("upload")]
@@ -56,24 +79,23 @@ namespace Vacations.API.Controllers
         {
             try
             {
-                using (Stream stream = Response.Body)
+                var currentUserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                var userDto = await _usersService.GetByEmailAsync(currentUserEmail);
+                var userModel = _mapper.Map<UserDto, UserModel>(userDto);
+
+                var file = Request.Form.Files[0];
+                using (var binaryReader = new BinaryReader(file.OpenReadStream()))
                 {
-                    using (var binaryReader = new BinaryReader(stream))
-                    {
-                        if (Response.ContentLength != null)
-                        {
-                            var fileContent = binaryReader.ReadBytes((int)Response.ContentLength);
-                            var blockBlob = _blobContainer.GetBlockBlobReference("Guid");
+                        var fileContent = binaryReader.ReadBytes((int)file.Length);
+                        var blockBlob = _blobContainer.GetBlockBlobReference(userModel.EmployeeId.ToString());
 
-                            await blockBlob.UploadFromByteArrayAsync(fileContent, 0, fileContent.Length);
-                        }
-                    }
-                    // The parameter to the GetBlockBlobReference method will be the name
-                    // of the image (the blob) as it appears on the storage server.
-                    // You can name it anything you like; in this example, I am just using
-                    // the actual filename of the uploaded image.
-
+                        await blockBlob.UploadFromByteArrayAsync(fileContent, 0, fileContent.Length);
                 }
+                // The parameter to the GetBlockBlobReference method will be the name
+                // of the image (the blob) as it appears on the storage server.
+                // You can name it anything you like; in this example, I am just using
+                // the actual filename of the uploaded image.
 
                 return Ok();
             }

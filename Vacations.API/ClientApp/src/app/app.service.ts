@@ -50,20 +50,29 @@ export class MyFirstInterceptor implements HttpInterceptor {
         constructor(private router: Router, private toaster: ToastrService){ }
 
         intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
+
+        req = req.clone({ headers: req.headers.set('Accept', 'application/json')});
+
+        if (!req.headers.has('Content-Type')){
+            // if (!(req.headers.get('Content-Type') == "multipart/form-data"))
+            // {
+            //     req = req.clone({ headers: req.headers.set('Content-Type', 'application/json')});
+            // }
+        }
+
         if (localStorage.getItem('token') && !req.headers.has('Authorization')) {
             req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'))});
         }
 
-        console.log("Inter on");
+//        console.log("Inter on");
 
         return next.handle(req).do((event: HttpEvent<any>) => 
         {
             if (event instanceof HttpResponse) {
-                console.log("Inter HttpResponse");
+ //               console.log("Inter HttpResponse");
               }
         }, (err: any) => {
-            console.log("Inter in");
+//            console.log("Inter in");
             if (err instanceof HttpErrorResponse) {
                 if(err.status === 401)
                 {
@@ -73,7 +82,7 @@ export class MyFirstInterceptor implements HttpInterceptor {
                 {
                     // this.router.navigate(["/main"]);
                 }
-                console.log("Inter toaster");
+ //               console.log("Inter toaster");
                 this.toaster.error(err.message, err.status.toString());
                 return Observable.throw(err);
             }

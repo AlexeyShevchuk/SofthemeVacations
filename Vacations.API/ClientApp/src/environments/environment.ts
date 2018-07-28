@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:2705/api'
+  baseUrl: 'https://btangular.azurewebsites.net/api'
 };

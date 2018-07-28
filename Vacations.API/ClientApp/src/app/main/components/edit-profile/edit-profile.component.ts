@@ -30,7 +30,7 @@ export class EditProfileComponent implements OnInit {
   }
 
  uploadFileToActivity() {
-  this.imgUploadService.postFile(environment.baseUrl + "/images/upload",this.fileToUpload).subscribe(data => {
+  this.imgUploadService.postFile("http://localhost:2076/api" + "/images/upload",this.fileToUpload).subscribe(data => {
     this.toast.success("File uploaded!","Success")
     }, error => {
       console.log(error);
