@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Vacations.API.Models;
 using Vacations.BLL.Models;
 using Vacations.DAL.Models;
 
