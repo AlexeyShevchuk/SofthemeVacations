@@ -15,6 +15,7 @@ namespace Vacations.API.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
+
         public RolesController(
              RoleManager<IdentityRole> roleManager,
              IMapper mapper

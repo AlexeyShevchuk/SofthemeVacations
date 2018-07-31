@@ -10,6 +10,7 @@ namespace Vacations.BLL.Services
     public interface IVacationStatusService
     {
         VacationStatusDto GetById(Guid idGuid);
+
         Task<VacationStatusDto> GetByIdAsync(Guid idGuid);
 
         IEnumerable<VacationStatusDto> Get();

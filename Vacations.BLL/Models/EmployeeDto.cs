@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Vacations.BLL.Models
 {
     public partial class EmployeeDto
     {
         public Guid EmployeeId { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Surname { get; set; }
+
+        [Required]
         public string WorkEmail { get; set; }
         public string PersonalEmail { get; set; }
         public string TelephoneNumber { get; set; }
@@ -23,6 +30,8 @@ namespace Vacations.BLL.Models
         public Guid? JobTitleId { get; set; }
         public Guid? TeamId { get; set; }
         public Guid? TeamLeadId { get; set; }
+
+        [Required]
         public string Role { get; set; }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using Vacations.BLL.Models;
 using Vacations.DAL.Models;
 
@@ -15,17 +13,17 @@ namespace Vacations.BLL.Services
     {
         private readonly IMapper _mapper;
         private readonly VacationsDbContext _context;
-        private readonly UserManager<User> _userManager;
+        private readonly IUsersService _usersService;
 
         public EmployeesService(
             VacationsDbContext context,
             IMapper mapper,
-            UserManager<User> userManager
+             IUsersService usersService
             )
         {
             _mapper = mapper;
             _context = context;
-            _userManager = userManager;
+            _usersService = usersService;
         }
 
         public IEnumerable<EmployeeDtoList> Get()
@@ -34,38 +32,18 @@ namespace Vacations.BLL.Services
             return employees;
         }
 
-        public EmployeeDto GetById(Guid id)
+        public async Task<EmployeeDto> GetByCurrentUserAsync(ClaimsPrincipal user)
         {
-            var employee = _context.Employee.FirstOrDefault(e => e.EmployeeId == id);
+            var currentUser = await _usersService.GetUserAsync(user);
 
-            if (employee != null)
-                return new EmployeeDto()
-                {
-                    EmployeeId = employee.EmployeeId,
-                    Name = employee.Name,
-                    Surname = employee.Surname,
-                    Birthday = employee.Birthday,
-                    PersonalEmail = employee.PersonalEmail,
-                    WorkEmail = employee.WorkEmail,
-                    TelephoneNumber = employee.TelephoneNumber,
-                    Skype = employee.Skype,
-                    StartDate = employee.StartDate,
-                    EndDate = employee.EndDate,
-                    TeamName = employee.Team.Name,
-                    TeamLeadName = employee.Team.TeamLead.Name,
-                    TeamLeadSurname = employee.Team.TeamLead.Surname,
-                    Balance = employee.Balance,
-                    EmployeeStatusId = employee.EmployeeStatusId,
-                    JobTitleId = employee.JobTitleId,
-                    TeamId = employee.TeamId,
-                    TeamLeadId = employee.Team.TeamLead.EmployeeId
-                };
-            throw new NullReferenceException("Employee not found!");
+            return await GetByIdAsync(currentUser.EmployeeId);
         }
 
         public async Task<EmployeeDto> GetByIdAsync(Guid id)
         {
-            var employee = await _context.Employee.Include(e => e.Team.TeamLead).FirstOrDefaultAsync(e => e.EmployeeId == id);
+            var employee = await _context.Employee
+                .Include(e => e.Team.TeamLead)
+                .FirstOrDefaultAsync(e => e.EmployeeId == id);
 
             if (employee != null)
                 return new EmployeeDto()

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vacations.BLL.Models;
 using Vacations.BLL.Services;
-using Vacations.DAL.Models;
 
 namespace Vacations.API.Controllers
 {
@@ -20,16 +15,13 @@ namespace Vacations.API.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
         private readonly IEmployeesService _employeesService;
 
         public EmployeesController(
             IMapper mapper,
-            UserManager<User> userManager,
             IEmployeesService employeesService)
         {
             _mapper = mapper;
-            _userManager = userManager;
             _employeesService = employeesService;
         }
 
@@ -44,11 +36,6 @@ namespace Vacations.API.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentEmployee()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var userDto = await _userManager.GetUserAsync(User);
 
             if (userDto == null)
