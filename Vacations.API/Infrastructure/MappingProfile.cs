@@ -27,6 +27,12 @@ namespace Vacations.API.Infrastructure
                 .ForMember(vdto => vdto.TeamName, o => o.MapFrom(v => v.Employee.Team.Name))
                 .ForMember(vdto => vdto.VacationTypeName, o => o.MapFrom(v => v.VacationTypes.Name));
 
+            CreateMap<VacationDto, Vacation>()
+                .ForMember(vdto => vdto.Transaction, opt => opt.Ignore())
+                .ForMember(vdto => vdto.VacationStatus, opt => opt.Ignore())
+                .ForMember(vdto => vdto.VacationTypes, opt => opt.Ignore())
+                .ForMember(vdto => vdto.Employee, opt => opt.Ignore());
+
             CreateMap<Team, TeamDto>()
                 .ForMember(tdto => tdto.TeamLeadName, o => o.MapFrom(t => t.TeamLead.Name))
                 .ForMember(tdto => tdto.TeamLeadSurname, o => o.MapFrom(t => t.TeamLead.Surname))
