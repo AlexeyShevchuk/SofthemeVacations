@@ -14,6 +14,11 @@ export class ProfileService {
         return this.http.get<Profile>(`${requestUrl}`);
     }
 
+    getProfileById(id: string): Observable<Profile> {
+        let requestUrl = environment.baseUrl + '/profile/' + id;
+        return this.http.get<Profile>(`${requestUrl}`);
+    }
+
     getEmployees(): Observable<Profile[]> {
         let requestUrl = environment.baseUrl + '/employees';
         return this.http.get<Profile[]>(`${requestUrl}`);

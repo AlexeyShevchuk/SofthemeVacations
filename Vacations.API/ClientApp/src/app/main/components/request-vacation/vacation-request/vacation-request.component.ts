@@ -23,14 +23,15 @@ export class VacationRequestComponent implements OnInit {
   vacTypes: VacType[] = [];
   dateDiff: any = 'XX';
   errorMessage: string = '';
+  stDateMessage: string = '';
+  endDateMessage: string = '';
+  today = new Date;
 
   constructor(private location: Location, private service: VacationService, private emplService: EditService, private toast: ToastrService) { }
 
   cancel() {
     this.location.back();
   }
-
-
 
   ngOnInit() {
     const successfnEmployee = (response) => {
@@ -51,8 +52,6 @@ export class VacationRequestComponent implements OnInit {
     this.emplService.getEmployee().subscribe(successfnEmployee, errorfn, completefn);
   }
 
-
-
   calculateDate() {
     console.log("was trying to parse");
     this.DaysInVac(
@@ -69,10 +68,19 @@ export class VacationRequestComponent implements OnInit {
   }
 
   DaysInVac(frst, lst) {
+    if ( frst < this.parseDate(this.today) && frst ) {
+      this.stDateMessage = 'Start date cannot be less than today!'
+    } 
+    if (lst < this.parseDate(this.today) && lst) {
+      this.endDateMessage = 'End date cannot be less than today!'
+    }
+    
     if (frst && lst) {
       if (lst < frst) {
         this.errorMessage = 'You put invalid dates!';
       } else {
+        this.stDateMessage = '';
+        this.endDateMessage = '';
         this.errorMessage = '';
         this.dateDiff = (lst - frst) / 1000 / 60 / 60 / 24;
         if (this.dateDiff > this.employee.Balance) {
