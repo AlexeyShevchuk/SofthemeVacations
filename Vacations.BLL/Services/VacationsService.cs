@@ -173,6 +173,30 @@ namespace Vacations.BLL.Services
                 scope.Complete();
             }
 
+            await VacationStatusSendEmail(vacationDto, (await _context.Employee.FirstOrDefaultAsync(e => e.EmployeeId == vacation.EmployeeId)).WorkEmail);
+        }
+
+        public async Task PostCurrentAsync(ClaimsPrincipal user, VacationDto vacationDto)
+        {
+            var currentUser = await _usersService.GetUserAsync(user);
+
+            vacationDto.EmployeeId = currentUser.EmployeeId;
+
+            vacationDto.VacationId = new Guid();
+
+            if (_vacationStatusService != null)
+                vacationDto.VacationStatusId = _vacationStatusService.Get().FirstOrDefault(vs => vs.Name == "InProcess")
+                    .VacationStatusId;
+
+            if (vacationDto.VacationStatusId == null)
+            {
+                throw new ArgumentException("");
+            }
+
+            _context.Vacation.Add(_mapper.Map<VacationDto, Vacation>(vacationDto));
+
+            await _context.SaveChangesAsync();
+
             var workEmail = (await _context.Employee
                 .Include(t => t.Team.TeamLead)
                 .Select(
@@ -196,28 +220,6 @@ namespace Vacations.BLL.Services
             }
         }
 
-        public async Task PostCurrentAsync(ClaimsPrincipal user, VacationDto vacationDto)
-        {
-            var currentUser = await _usersService.GetUserAsync(user);
-
-            vacationDto.EmployeeId = currentUser.EmployeeId;
-
-            if (_vacationStatusService != null)
-                vacationDto.VacationStatusId = _vacationStatusService.Get().FirstOrDefault(vs => vs.Name == "InProcess")
-                    .VacationStatusId;
-
-            if (vacationDto.VacationStatusId == null)
-            {
-                throw new ArgumentException("");
-            }
-
-            _context.Vacation.Add(_mapper.Map<VacationDto, Vacation>(vacationDto));
-
-            await VacationStatusSendEmail(vacationDto, currentUser.Email);
-
-            await _context.SaveChangesAsync();
-        }
-
         private async Task VacationStatusSendEmail(VacationDto vacation, string email)
         {
             var callbackUrl =
@@ -232,8 +234,8 @@ namespace Vacations.BLL.Services
             var callbackUrl =
                 $"{_configuration["Domain:RequestScheme"]}://{_configuration["Domain:DomainName"]}/vacation-requests";
             await _emailSender.SendEmailAsync(email, "New Vacation Request",
-                $"You have new vacation request from {vacation.EmployeeName} {vacation.EmployeeSurname}." +
-                $"<a href='{callbackUrl}'>https://btangular.azurewebsites.net/profile</a>");
+                $"You have new vacation request." +
+                $"<a href='{callbackUrl}'>https://btangular.azurewebsites.net/vacation-requests</a>");
         }
 
         public async Task<IEnumerable<VacationDto>> GetVacationRequestsAsync(ClaimsPrincipal user)

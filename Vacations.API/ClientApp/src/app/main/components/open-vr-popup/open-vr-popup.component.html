@@ -3,7 +3,9 @@
 
   <div class="details">
     <div class="topuser">
-      <div class="Myphoto"></div>
+      <div class="user-photo float-left" style="background:url({{imgUrl}}) no-repeat 0px 0;background-size: auto 90px;">
+          <img src="{{imgUrl}}" style="border-radius:50%; height:50px; width:50px;margin-top: 18px;" />
+        </div>
       <div class="pull-right">
         <p style="font-size: 14px;"> {{employee.Name}} {{employee.Surname}}
           <br> {{employee.JobTitle}}

@@ -17,6 +17,8 @@ export class TopNavigationComponent implements OnInit {
   constructor(private service: EditService, private router: Router) { }
 
   ngOnInit() {
+    this.imgUrl = '../../../../assets/user-profile-icon.svg'
+    let employee: Employee;
     this.service.getEmployee().subscribe(response => {
       this.employee = response;
       this.imgUrl = this.employee.ImgUrl

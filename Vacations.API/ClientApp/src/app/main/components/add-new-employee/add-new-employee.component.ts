@@ -54,6 +54,8 @@ export class AddNewEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imgUrl = '../../../../assets/user-profile-icon.svg'
+    
     const successfnTeams = (response) => {
       this.teams = response;
       console.log(response);
@@ -83,10 +85,6 @@ export class AddNewEmployeeComponent implements OnInit {
     this.service.getJobTitle().subscribe(successfnJobTitles, errorfn, completefn);
     this.service.getEmployeeStatus().subscribe(successfnEmployeeStatus, errorfn, completefn);
     this.service.getEmployeeRole().subscribe(successfnEmployeeRole, errorfn, completefn);
-
-    // this.imgUploadService.getImgUrl().subscribe(
-    //   response => { this.imgUrl = response; console.log(response); console.log(this.imgUrl); },
-    //   () => this.imgUrl = "default");
   }
 
   Save() {
