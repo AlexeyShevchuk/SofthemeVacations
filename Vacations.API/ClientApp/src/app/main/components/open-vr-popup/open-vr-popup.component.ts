@@ -31,7 +31,7 @@ export class OpenVRPopupComponent implements OnInit {
   constructor(private vacService: VacationService,
     private emplService: EditService,
     private profService: ProfileService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     public thisDialogRef: MatDialogRef<OpenVRPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string) { }
 
