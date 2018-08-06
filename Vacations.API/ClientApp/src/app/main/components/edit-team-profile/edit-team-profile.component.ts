@@ -5,10 +5,10 @@ import { MatChipInputEvent } from '@angular/material';
 import { ProfileService } from '../../services/profile.service';
 
 import { Profile } from '../profile/my-profile/profile.model';
-
-export interface User {
-  name: string;
-}
+import { ActivatedRoute } from '@angular/router';
+import { TeamService } from '../../services/team.service';
+import { Team } from '../edit-profile/models/team.model';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-edit-team-profile',
@@ -17,22 +17,25 @@ export interface User {
 })
 
 export class EditTeamProfileComponent implements OnInit {
+  id: string;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  team: Team = <Team>{};
+  teamLead: string;
   
-  users: User[] = [
-    { name: 'Markiz de Saad' },
-    { name: 'Harry Potter' },
-    { name: 'Sara Konor' },
-  ];
+  users: User[] = [];
 
   employees: Profile[] = [];
   noTeamEmpl: Profile[] = [];
 
-  constructor(private service: ProfileService) { }
+  constructor(private service: ProfileService, 
+    private teamService: TeamService,
+    private activateRoute: ActivatedRoute) {
+      this.id = this.activateRoute.snapshot.paramMap.get('id');
+    }
 
   ngOnInit() {
     this.service.getEmployees()
@@ -42,10 +45,21 @@ export class EditTeamProfileComponent implements OnInit {
           let i = 0;
           if (!item.TeamId) {
             this.noTeamEmpl[i] = item;
-            i++;
+            this.users[i].name = this.noTeamEmpl[i].Name;
+            this.users[i].surname = this.noTeamEmpl[i].Surname;
+            console.log(this.users);
+            i=i+1;            
           }
-        }
+        } 
     });
+
+    this.teamService.getTeam(this.id).subscribe(response => {
+      this.team = response;
+      console.log(response);
+      console.log(this.team);
+      this.teamLead = this.team.TeamLeadName + ' ' +this.team.TeamLeadSurname;
+    });
+    
   }
 
   add(event: MatChipInputEvent): void {
@@ -55,7 +69,7 @@ export class EditTeamProfileComponent implements OnInit {
     // Add our user
     if ((value || '').trim()) {
       console.log("Add user");
-      this.users.push({ name: value.trim() });
+      this.users.push({ name: value.trim(),  surname: value.trim()  });
     }
 
     // Reset the input value
@@ -75,6 +89,6 @@ export class EditTeamProfileComponent implements OnInit {
   OnClick(empl: Profile){
     let employee = empl.Name + ' ' + empl.Surname;
     console.log("Click on user");
-    this.users.push({ name: employee.trim() });
+    this.users.push({ name: employee.trim(), surname: employee.trim() });
   }
 }

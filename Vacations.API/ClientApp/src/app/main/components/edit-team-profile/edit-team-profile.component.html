@@ -10,9 +10,9 @@
         <tr>
           <td>
             <label for="usr">team name</label>
-            <input type="text" class="form-control" id="usr" placeholder="Team Name">
+            <input type="text" class="form-control" id="usr" [value]="team.Name" >
             <label for="srnm" style="margin-top: 30px;">team leader</label>
-            <input type="text" class="form-control" id="srnm" placeholder="Team Leader">
+            <input type="text" class="form-control" id="srnm" [value]="teamLead">
           </td>
           <td colspan="2" class="kostil">
             <label for="mem">members</label>
