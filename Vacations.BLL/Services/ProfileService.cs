@@ -22,6 +22,7 @@ namespace Vacations.BLL.Services
         public async Task<ProfileDto> GetByIdAsync(Guid idGuid)
         {
             var employee = await _context.Employee
+                .Include(e => e.Team)
                 .Include(e => e.Team.TeamLead)
                 .Include(e => e.EmployeeStatus)
                 .Include(e => e.JobTitle)

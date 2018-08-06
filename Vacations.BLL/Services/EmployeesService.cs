@@ -81,13 +81,18 @@ namespace Vacations.BLL.Services
 
         public async Task PutAsync(EmployeeDto employeeDto, ClaimsPrincipal admin)
         {
-            var user = await _usersService.FindByEmailAsync(employeeDto.WorkEmail);
-
             var employee = await _context.Employee.FindAsync(employeeDto.EmployeeId);
 
-            if (user == null || employee == null)
+            if (employee == null)
             {
-                return;
+                throw new InvalidOperationException();
+            }
+
+            var user = await _usersService.FindByEmailAsync(employee.WorkEmail);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException();
             }
 
             _context.Entry(employee).State = EntityState.Detached;

@@ -154,15 +154,18 @@ namespace Vacations.BLL.Services
 
         public async Task UpdateUserRole(User user, string roleId)
         {
-            var result4 = await _roleManager.FindByIdAsync(roleId);
+            var role = await _roleManager.FindByIdAsync(roleId);
 
-            if (result4 != null)
+            if (role != null)
             {
                 var oldRole = await GetUserRole(user);
 
-                var result3 = await _userManager.RemoveFromRoleAsync(user, oldRole);
+                if (oldRole != null)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, oldRole);
+                }
 
-                await _userManager.AddToRoleAsync(user, result4.Name);
+                await _userManager.AddToRoleAsync(user, role.Name);
             }
         }
 

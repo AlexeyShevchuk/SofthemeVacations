@@ -23,6 +23,7 @@ export class MyProfileComponent implements OnInit {
   imgUrl: string;
 
   ngOnInit() {
+    this.imgUrl = '../../../../assets/user-profile-icon.svg';
     this.service.getProfile().subscribe(response => {
       this.employee = response;
       this.imgUrl = this.employee.ImgUrl

@@ -61,6 +61,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imgUrl = '../../../../assets/user-profile-icon.svg'
     const successfnEmployee = (response) => {
       this.employee = response;
       this.imgUrl = this.employee.ImgUrl;
