@@ -9,6 +9,8 @@ import { EditService } from '../../services/edit.service';
 import { Employee } from '../edit-profile/models/employee.model';
 import { VacRequest } from '../list-of-vacation-requests/vacation-request.model';
 import { Statuses } from './vacation-statuses.model';
+import { Profile } from '../profile/my-profile/profile.model';
+import { ProfileService } from '../../services/profile.service';
 
 
 
@@ -23,11 +25,13 @@ export class OpenVRPopupComponent implements OnInit {
   employee: Employee = <Employee>{};
   vacStatuses: Statuses[] = [];
   dateDiff: any = 'XX';
+  profile: Profile = <Profile>{};
   imgUrl: string
-
+  
   constructor(private vacService: VacationService,
     private emplService: EditService,
-    private toastr: ToastrService,
+    private profService: ProfileService,
+    private toast: ToastrService,
     public thisDialogRef: MatDialogRef<OpenVRPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string) { }
 
@@ -51,13 +55,20 @@ export class OpenVRPopupComponent implements OnInit {
       console.log(response);
       this.calculateDate();
       this.emplService.getEmployeeId(this.emplVacation.EmployeeId).subscribe(successfnEmployee, errorfn, completefn);
-      this.balanceChecking();
+      this.profService.getProfileById(this.emplVacation.EmployeeId).subscribe(response => {
+        this.profile = response;
+        console.log(this.employee);
+      } );
+
+      //this.balanceChecking();
     }); 
 
     this.vacService.getVacationStatuses().subscribe(response => {
       this.vacStatuses = response;
       console.log(response);
     })
+
+   
   }
 
   balanceChecking(){

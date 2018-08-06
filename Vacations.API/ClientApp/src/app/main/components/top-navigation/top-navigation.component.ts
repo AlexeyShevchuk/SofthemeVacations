@@ -11,6 +11,7 @@ import { Employee } from '../edit-profile/models/employee.model';
 })
 export class TopNavigationComponent implements OnInit {
 
+  employee: Employee = <Employee>{};
   imgUrl: string;
 
   constructor(private service: EditService, private router: Router) { }
@@ -19,9 +20,9 @@ export class TopNavigationComponent implements OnInit {
     this.imgUrl = '../../../../assets/user-profile-icon.svg'
     let employee: Employee;
     this.service.getEmployee().subscribe(response => {
-      employee = response;
-      this.imgUrl = employee.ImgUrl
-      console.log(employee);
+      this.employee = response;
+      this.imgUrl = this.employee.ImgUrl
+      console.log(this.employee);
       console.log(response);
     });
   }

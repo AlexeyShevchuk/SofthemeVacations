@@ -22,7 +22,7 @@
           <a class="nav-link active" [routerLink]="['/profile']" routerLinkActive="profile">
             <span>My Profile</span>
             <div></div>
-          </a>
+          </a> 
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/request-vacation']" routerLinkActive="request-vacation">
@@ -32,7 +32,7 @@
         </li>
       </ul>
     </div>
-    <p>Team Leader </p>
+    <p> {{employee.Name}} {{employee.Surname}} </p>
     <div class="float-right user-dropdown">
       <button class="rounded-circle user-photo" style="background: url() no-repeat 0px 0;background-size: auto 60px; border: none; outline: none;">
         <img src="{{imgUrl}}" (click)="viewdiv('mydiv');" style="border-radius:50%; height:30px; width:30px;" />
