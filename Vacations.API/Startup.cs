@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 using System.Buffers;
 using AutoMapper;
 using Vacations.API.Infrastructure;
-using Vacations.BLL.Services;
 using Vacations.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
@@ -38,12 +37,10 @@ namespace Vacations.API
 
         public IConfiguration Configuration { get; }
 
-        //This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<VacationsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VacationsDBConn")));
 
-            //Configure DAL services
             Installer.ConfigureServices(services);
 
             services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
@@ -57,7 +54,7 @@ namespace Vacations.API
                 .AddEntityFrameworkStores<VacationsDbContext>()
                 .AddDefaultTokenProviders();
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -97,8 +94,6 @@ namespace Vacations.API
 
             services.AddAutoMapper();
 
-            //services.Configure<AuthMessageSenderOptions>(Configuration);
-
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -106,16 +101,9 @@ namespace Vacations.API
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors("AllowAllOrigins");
-
-            //app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
-            //{
-            //    settings.GeneratorSettings.DefaultPropertyNameHandling =
-            //        PropertyNameHandling.CamelCase;
-            //});
 
             app.UseAuthentication();
 

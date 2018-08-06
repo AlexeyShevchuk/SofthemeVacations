@@ -10,7 +10,6 @@ using Vacations.DAL.Models;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
 using Vacations.BLL.Models;

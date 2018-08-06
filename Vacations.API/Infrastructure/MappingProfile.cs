@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
 using Vacations.BLL.Models;
 using Vacations.DAL.Models;
 

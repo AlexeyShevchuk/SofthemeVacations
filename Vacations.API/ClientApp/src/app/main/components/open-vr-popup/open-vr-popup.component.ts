@@ -31,7 +31,7 @@ export class OpenVRPopupComponent implements OnInit {
   constructor(private vacService: VacationService,
     private emplService: EditService,
     private profService: ProfileService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     public thisDialogRef: MatDialogRef<OpenVRPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string) { }
 
@@ -60,7 +60,7 @@ export class OpenVRPopupComponent implements OnInit {
         console.log(this.employee);
       } );
 
-      //this.balanceChecking();
+      this.balanceChecking();
     }); 
 
     this.vacService.getVacationStatuses().subscribe(response => {

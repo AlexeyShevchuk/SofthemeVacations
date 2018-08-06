@@ -32,7 +32,15 @@ namespace Vacations.BLL.Services
 
         public async Task<string> GetUrlAsync(string imgName)
         {
-            var blockBlob = _blobContainer.GetBlockBlobReference(imgName);
+            CloudBlockBlob blockBlob;
+
+            if (imgName == null)
+            {
+                blockBlob = _blobContainer.GetBlockBlobReference("default");
+                return blockBlob.Uri.AbsoluteUri;
+            }
+
+            blockBlob = _blobContainer.GetBlockBlobReference(imgName);
 
             if (await blockBlob.ExistsAsync())
             {

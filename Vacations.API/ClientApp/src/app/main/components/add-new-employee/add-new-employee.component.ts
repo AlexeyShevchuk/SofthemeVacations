@@ -73,7 +73,6 @@ export class AddNewEmployeeComponent implements OnInit {
     };
     const successfnEmployeeRole = (response) => {
       this.employeeRoles = response;
-      this.toast.success("", "");
       console.log(response);
       console.log(this.employeeRoles);
     };

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Vacations.BLL.Models
+﻿namespace Vacations.BLL.Models
 {
     public class TokenDto
     {

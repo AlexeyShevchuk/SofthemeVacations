@@ -1,31 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Vacations.BLL.Models;
-using Vacations.BLL.Services;
 using Vacations.DAL.Models;
 
 namespace Vacations.BLL.Services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly IMapper _mapper;
         private readonly VacationsDbContext _context;
         private readonly IUsersService _usersService;
 
         public TransactionService(
             VacationsDbContext context,
-            IMapper mapper,
             IUsersService usersService
             )
         {
-            _mapper = mapper;
             _context = context;
             _usersService = usersService;
         }

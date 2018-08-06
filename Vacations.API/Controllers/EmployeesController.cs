@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +24,7 @@ namespace Vacations.API.Controllers
             _employeesService = employeesService;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, TeamLead")]
         [HttpGet]
         public IEnumerable<EmployeeDtoList> Get()
         {
