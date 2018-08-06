@@ -16,7 +16,7 @@ import 'rxjs/add/operator/do';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
-export class MyDataService implements OnInit {
+export class DataService implements OnInit {
     constructor(private http: HttpClient, private router: Router) { }
 
     ngOnInit() {
@@ -44,7 +44,7 @@ export class MyDataService implements OnInit {
 }
 
 @Injectable()
-export class MyFirstInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
     constructor(private router: Router, private toaster: ToastrService) { }
 

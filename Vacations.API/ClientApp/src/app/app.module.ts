@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutes } from './app.routes';
-import { MyFirstInterceptor, MyDataService } from './app.service';
+import { AuthInterceptor, DataService } from './app.service';
 
 import { MainModule } from './main/main.module';
 
@@ -36,7 +36,7 @@ import { MainModule } from './main/main.module';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: MyFirstInterceptor,
+    useClass: AuthInterceptor,
     multi: true,
   }],
   bootstrap: [AppComponent]
