@@ -4,5 +4,5 @@ export interface Team {
     Name: string;
     MembersNumber: string;
     TeamLeadName: string;
-    NeamLeadSurname: string;
+    TeamLeadSurname: string;
 }

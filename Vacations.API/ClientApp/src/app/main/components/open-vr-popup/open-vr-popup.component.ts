@@ -54,7 +54,7 @@ export class OpenVRPopupComponent implements OnInit {
         console.log(this.employee);
       } );
 
-      //this.balanceChecking();
+      this.balanceChecking();
     }); 
 
     this.vacService.getVacationStatuses().subscribe(response => {

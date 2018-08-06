@@ -24,4 +24,13 @@ export class TeamService {
 
         return this.http.post<Team>(requestUrl, data, { headers: this.ContentTypeHeader }).map(() => team);
     }
+
+    getTeam(id: string): Observable<Team> {
+        let idUrl = id;
+        console.log(id);
+        console.log(idUrl);
+        let currentUrl = '/teams/' + idUrl;
+        let requestUrl = environment.baseUrl + currentUrl;
+        return this.http.get<Team>(`${requestUrl}`);
+    }
 }

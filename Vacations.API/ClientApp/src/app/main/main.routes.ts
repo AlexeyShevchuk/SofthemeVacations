@@ -27,7 +27,7 @@ export const MainRoutes: Routes = [
       },
       { path: 'vacation-requests', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin', expectedTeamLeadRole: 'TeamLead' }, component: ListOfVacationRequestsComponent },
       { path: 'add-new-team', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: AddNewTeamComponent },
-      { path: 'edit-team', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: EditTeamProfileComponent },
+      { path: 'edit-team/:id', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: EditTeamProfileComponent },
       { path: 'edit-profile', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: EditProfileComponent },
       { path: 'edit-profile/:id', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: EditProfileComponent },
       { path: 'list-of-teams', canActivate: [RoleGuardService], data: { expectedAdminRole: 'Admin' }, component: ListOfTeamsComponent },
